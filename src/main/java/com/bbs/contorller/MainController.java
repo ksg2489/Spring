@@ -1,9 +1,5 @@
 package com.bbs.contorller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -22,12 +18,36 @@ public class MainController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
+	@Inject
+	UsersService usersService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) throws Exception {
+	public String main(Model model) throws Exception {
 	
 		
 		return "main/main";
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public String join(Model model) throws Exception {
+	
+		model.addAttribute("msg","반갑습니다.");
+		
+		return "main/join";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model) throws Exception {
+	
+		
+		return "main/login";
+	}
+	
+	@RequestMapping(value ="/idCheck",method = RequestMethod.GET)
+	public String idCheck(String user_id) throws Exception{
+		
+		int result =usersService.idCheck(user_id);
+		return null;
 	}
 	
 }
