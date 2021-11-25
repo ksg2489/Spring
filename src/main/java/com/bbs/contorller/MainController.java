@@ -45,7 +45,10 @@ public class MainController {
 		return "main/login";
 	}
 	//http://localhost:8081/idCheck?user_id=qwer
+	//url 패턴이 'path/idCheck'일 경우
 	@RequestMapping(value ="/idCheck",method = RequestMethod.GET)
+	
+	//반환값을 페이지에 직접출력할경우
 	@ResponseBody //리턴에는 경로값이 들어가는데  출력값을 가져오려면 ResponseBody가 있어야함
 	public String idCheck(String user_id) throws Exception{
 		
@@ -54,6 +57,17 @@ public class MainController {
 		//String str =Integer.toString(result); //문자열로 정석적인 방법
 		return result+"";
 	}
+	
+	//url 패턴이 'path/sendAuthMail'일 경우
+	@RequestMapping(value = "/sendAuthMail",method = RequestMethod.GET)
+	@ResponseBody
+	public String sendAuthMail(String user_mail) throws Exception{
+		
+		int result =usersService.setAuthnum(user_mail);
+		
+		return result+"";
+	}
+			
 	
 }
 
