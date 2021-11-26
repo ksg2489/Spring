@@ -39,5 +39,21 @@
  		WHERE user_mail=#{user_mail}
  	</delete>
  	
+ 	<!--  회원가입 SQL문 -->
+ 	<insert id="join">
+ 		INSERT INTO USERS
+ 		VALUES (#{user_id},#{user_pw},#{user_name},#{user_gender},#{user_email},#{user_addr})
+ 	</insert>
+ 	
+ 	<!-- 로그인 SQL문 -->
+ 	<select id="login" resultType="com.bbs.vo.Users">
+ 		SELECT *
+ 		FROM USERS
+ 		WHERE user_id=#{user_id}
+ 		AND   user_pw=#{user_pw}
+ 	</select>
+ 	
+ 	
+ 	
  	
  </mapper>
