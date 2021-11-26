@@ -8,4 +8,5 @@ public interface UsersDAO {
 	public Integer getAuthnum(String user_mail) throws Exception;
 	public void setAuthnum(Authmail authmail) throws Exception;
 	public void resetAuthnum(Authmail authmail) throws Exception;
+	public void deleteAuthmail(String uer_mail) throws Exception;
 }

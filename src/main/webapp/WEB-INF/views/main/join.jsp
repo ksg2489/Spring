@@ -21,12 +21,11 @@
 
 <script>
 $(document).ready(function(){
-	var msg = '$(msg)';
-	if(msg !=null&&msg !=='') alert('msg');
-	
+	var msg = '${msg}';
+	if(msg != null && msg != '') alert(msg);
 });
-
 </script>
+
 
 </head>
 
