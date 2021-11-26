@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbs.service.UsersService;
+import com.bbs.vo.Authmail;
 
 
 @Controller
@@ -68,6 +69,16 @@ public class MainController {
 		return result+"";
 	}
 			
+	//url 패턴이 'path/mailAuth'일 경우
+	@RequestMapping(value= "/mailAuth",method =RequestMethod.POST)
+	@ResponseBody// <-이거없이 return 하면 경로값이 넘어가지만 responseBody있으면 출력값을 가짐
+	public String mailAuth(Authmail authmail) throws Exception{
+		
+		
+		return null;
+	}
+	
+	
 	
 }
 

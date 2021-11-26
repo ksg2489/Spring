@@ -42,6 +42,12 @@ public class UsersDAOImpl implements UsersDAO {
 		
 	}
 
+	@Override
+	public void deleteAuthmail(String user_mail) throws Exception {
+		sqlSession.delete(SESSION+".deleteAuthmail",user_mail);
+		
+	}
+
 
 
 }
