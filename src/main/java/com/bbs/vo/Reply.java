@@ -1,27 +1,31 @@
 package com.bbs.vo;
 
-public class Boarder {
+public class Reply {
 
+	private int reply_id;
 	private int boarder_id;
 	private String writer;
-	private String title;
+	private int parent_id;
 	private String contents;
 	private String reg_date;
-	private int likey;
-	private int available;
 	
-	public Boarder() {}
+	public Reply() {}
 
-	public Boarder(int boarder_id, String writer, String title, String contents, String reg_date, int likey,
-			int available) {
-		
+	public Reply(int reply_id, int boarder_id, String writer, int parent_id, String contents, String reg_date) {
+		this.reply_id = reply_id;
 		this.boarder_id = boarder_id;
 		this.writer = writer;
-		this.title = title;
+		this.parent_id = parent_id;
 		this.contents = contents;
 		this.reg_date = reg_date;
-		this.likey = likey;
-		this.available = available;
+	}
+
+	public int getReply_id() {
+		return reply_id;
+	}
+
+	public void setReply_id(int reply_id) {
+		this.reply_id = reply_id;
 	}
 
 	public int getBoarder_id() {
@@ -40,12 +44,12 @@ public class Boarder {
 		this.writer = writer;
 	}
 
-	public String getTitle() {
-		return title;
+	public int getParent_id() {
+		return parent_id;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setParent_id(int parent_id) {
+		this.parent_id = parent_id;
 	}
 
 	public String getContents() {
@@ -63,22 +67,5 @@ public class Boarder {
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
-
-	public int getLikey() {
-		return likey;
-	}
-
-	public void setLikey(int likey) {
-		this.likey = likey;
-	}
-
-	public int getAvailable() {
-		return available;
-	}
-
-	public void setAvailable(int available) {
-		this.available = available;
-	}
-	
 	
 }
