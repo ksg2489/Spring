@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bbs.service.UsersService;
 import com.bbs.vo.Authmail;
@@ -44,6 +45,7 @@ public class MainController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) throws Exception {
 	
+		//model.addAttribute("msg","로그인페이지");//로그인페이지일때 띄우면 다른페이지에서 리다이렉트로 url이 로그인으로 넘어올때 새로운 msg가 나오지않음
 		
 		return "main/login";
 	}
@@ -78,7 +80,7 @@ public class MainController {
 		
 		return usersService.checkAuthnum(authmail)+"";
 	}
-	
+	//url 패턴이 'path/joinAction'일 경우
 	@RequestMapping(value = "/joinAction", method =RequestMethod.POST)
 	public String joinAction(Users users,String addr1, String addr2, String addr3) throws Exception{
 		users.setUser_addr(addr1+" "+addr2+" " +addr3);
@@ -86,23 +88,46 @@ public class MainController {
 		
 		return "redirect:/login";
 	}
-	
+	//url 패턴이 'path/loginAction'일 경우
 	@RequestMapping(value = "/loginAction", method =RequestMethod.POST)
-	public String loginAction(Users users,HttpSession session) throws Exception{
+	public String loginAction(Users users,HttpSession session,RedirectAttributes ra) throws Exception{
 		
 		int result =usersService.loginAction(users);
+		String url =null;
 		
 		if(result ==0) {
 			session.setAttribute("user_id", users.getUser_id());
+			url="redirect:/";
+			
 			//페이지 이동 ->localhost:8081/
+			
 		}
 		else {
+			ra.addFlashAttribute("msg","로그인정보가 일치하지 않습니다.");
+			//request.setAttribute("msg","로그인정보가 일치하지 않습니다.");//redirect로 url을변경되었을때 request.setAttribute먹히지않음
 			//메세지를 전달(로그인 정보가 잘못됐습니다.)
+			url="redirect:/login";
 			//페이지 이동 ->localhost:8081/login
 		}
 		
-		return null;
+		return url;
 	}
 	
+	@RequestMapping(value="/logout",method = RequestMethod.GET)
+	
+	public String logout(HttpSession session) throws Exception{
+		
+		session.invalidate();
+		
+		return "redirect:/";
+	}
+	
+	//url 패턴이 'path/bbs' 일경우
+	@RequestMapping(value = "/bbs", method =RequestMethod.GET)
+	public String bbs(Model model) throws Exception {
+		
+		
+		return "bbs/bbs";
+	}
 }
 
