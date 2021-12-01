@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      ul,
+      ol,
+      li {
+        list-style-type: none;
+      }
+      #hidden {
+        display: none;
+      }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $("#wrapper").html($("#hidden").html());
+        $("#wrapper").text($"#hidden").text());
+      });
+    </script>
+  </head>
+  <body>
+    <span
+      >id가 히든인 엘리먼트가 스타일속성 디스플레이 값이 눈으로 설정되어 있다 그
+      엘리먼트의 콘텐츠를 내용을바꿔라.</span
+    >
+    <div id="wrapper">
+      <span>이곳의 내용을 바꿔주세요</span>
+    </div>
+    <div id="hidden">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+      </ul>
+    </div>
+  </body>
+</html>

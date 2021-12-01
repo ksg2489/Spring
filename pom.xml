@@ -151,36 +151,33 @@
   			<artifactId>javax.mail-api</artifactId>
   			<version>1.6.2</version>
 		</dependency>
-		
 		<dependency>
   			<groupId>javax.mail</groupId>
- 			 <artifactId>mailapi</artifactId>
- 			 <version>1.4.3</version>
+  			<artifactId>mailapi</artifactId>
+  			<version>1.4.3</version>
 		</dependency>
-		
 		<dependency>
- 			<groupId>com.sun.mail</groupId>
+  			<groupId>com.sun.mail</groupId>
   			<artifactId>javax.mail</artifactId>
   			<version>1.6.2</version>
 		</dependency>
 		
-		<!-- fide upload -->
+		<!-- file upload -->
 		<dependency>
- 			<groupId>commons-fileupload</groupId>
+  			<groupId>commons-fileupload</groupId>
   			<artifactId>commons-fileupload</artifactId>
   			<version>1.4</version>
 		</dependency>
 		
 		<!-- MultipartHttpServletRequest -->
 		<dependency>
- 			<groupId>commons-io</groupId>
+  			<groupId>commons-io</groupId>
   			<artifactId>commons-io</artifactId>
   			<version>2.6</version>
 		</dependency>
 		
-		
 	</dependencies>
-<build>
+    <build>
         <plugins>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -219,7 +216,4 @@
         </plugins>
     </build>
 </project>
-
-
-
 

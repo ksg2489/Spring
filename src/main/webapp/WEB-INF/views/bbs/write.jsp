@@ -45,7 +45,7 @@ $(document).ready(function () {
 
 <!-- 글쓰기 양식 -->
 <div class="container">
-	<div class="row">								<!-- enctype : 파일전송을 위한 설정 -->
+	<div class="row">							 <!-- 파일 전송을 위한 enctype 설정 -->
 		<form method="POST" action="./writeAction" enctype="multipart/form-data">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #bbbbbb;">
 				<thead>
@@ -80,4 +80,3 @@ $(document).ready(function(){
 </body>
 
 </html>
-
