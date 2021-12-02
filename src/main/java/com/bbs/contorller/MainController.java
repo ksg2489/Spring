@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bbs.service.BbsService;
 import com.bbs.service.UsersService;
 import com.bbs.vo.Authmail;
 import com.bbs.vo.Users;
@@ -25,6 +26,8 @@ public class MainController {
 	
 	@Inject
 	UsersService usersService;
+	@Inject
+	BbsService bbsService;
 	
 	//url 패턴이 'path/'일 경우
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -49,37 +52,18 @@ public class MainController {
 		
 		return "main/login";
 	}
-	//http://localhost:8081/idCheck?user_id=qwer
-	//url 패턴이 'path/idCheck'일 경우
-	@RequestMapping(value ="/idCheck",method = RequestMethod.GET)
-	
-	//반환값을 페이지에 직접출력할경우
-	@ResponseBody //리턴에는 경로값이 들어가는데  출력값을 가져오려면 ResponseBody가 있어야함
-	public String idCheck(String user_id) throws Exception{
-		
-		int result =usersService.idCheck(user_id);
-		
-		//String str =Integer.toString(result); //문자열로 정석적인 방법
-		return result+"";
-	}
-	
-	//url 패턴이 'path/sendAuthMail'일 경우
-	@RequestMapping(value = "/sendAuthMail",method = RequestMethod.GET)
-	@ResponseBody
-	public String sendAuthMail(String user_mail) throws Exception{
-		
-		int result =usersService.setAuthnum(user_mail);
-		
-		return result+"";
-	}
+	// url 패턴이 'path/bbs' 일 경우
+		@RequestMapping(value = "/bbs", method = RequestMethod.GET)
+		public String bbs(Integer pageNumber, Model model) throws Exception {
 			
-	//url 패턴이 'path/mailAuth'일 경우
-	@RequestMapping(value= "/mailAuth",method =RequestMethod.POST)
-	@ResponseBody// <-이거없이 return 하면 경로값이 넘어가지만 responseBody있으면 출력값을 가짐
-	public String mailAuth(Authmail authmail) throws Exception{
+			if(pageNumber == null) pageNumber = 1;
+			
+			model.addAttribute("map", bbsService.bbs(pageNumber));
+			
+			return "bbs/bbs";
+		}
 		
-		return usersService.checkAuthnum(authmail)+"";
-	}
+	
 	//url 패턴이 'path/joinAction'일 경우
 	@RequestMapping(value = "/joinAction", method =RequestMethod.POST)
 	public String joinAction(Users users,String addr1, String addr2, String addr3) throws Exception{
@@ -122,12 +106,39 @@ public class MainController {
 		return "redirect:/";
 	}
 	
-	//url 패턴이 'path/bbs' 일경우
-	@RequestMapping(value = "/bbs", method =RequestMethod.GET)
-	public String bbs(Model model) throws Exception {
+	
+	//http://localhost:8081/idCheck?user_id=qwer
+	//url 패턴이 'path/idCheck'일 경우
+	@RequestMapping(value ="/idCheck",method = RequestMethod.GET)
+	
+	//반환값을 페이지에 직접출력할경우
+	@ResponseBody //리턴에는 경로값이 들어가는데  출력값을 가져오려면 ResponseBody가 있어야함
+	public String idCheck(String user_id) throws Exception{
 		
+		int result =usersService.idCheck(user_id);
 		
-		return "bbs/bbs";
+		//String str =Integer.toString(result); //문자열로 정석적인 방법
+		return result+"";
 	}
+	
+	//url 패턴이 'path/sendAuthMail'일 경우
+	@RequestMapping(value = "/sendAuthMail",method = RequestMethod.GET)
+	@ResponseBody
+	public String sendAuthMail(String user_mail) throws Exception{
+		
+		int result =usersService.setAuthnum(user_mail);
+		
+		return result+"";
+	}
+			
+	//url 패턴이 'path/mailAuth'일 경우
+	@RequestMapping(value= "/mailAuth",method =RequestMethod.POST)
+	@ResponseBody// <-이거없이 return 하면 경로값이 넘어가지만 responseBody있으면 출력값을 가짐
+	public String mailAuth(Authmail authmail) throws Exception{
+		
+		return usersService.checkAuthnum(authmail)+"";
+	}
+
+
 }
 

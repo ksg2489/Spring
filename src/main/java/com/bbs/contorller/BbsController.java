@@ -61,35 +61,36 @@ public class BbsController {
 		return "bbs/view";
 		
 	}
+	
 	// url 패턴이 'path/bbs/update' 일 경우
-		@RequestMapping(value = "/update", method = RequestMethod.GET)
-		public String update(Integer boarder_id, Model model, HttpSession session, RedirectAttributes ra) throws Exception {
-			
-			String user_id =(String)session.getAttribute("user_id");
-			
-			HashMap<String, Object> map = bbsService.view(boarder_id);
-			Boarder boarder = (Boarder)map.get("boarder");
-			
-			if(user_id ==null) {
-				ra.addFlashAttribute("msg", "로그인이 필요합니다..");
-				return "redirect:/login";
-			}
-			
-			if(boarder == null) {
-				ra.addFlashAttribute("msg", "존재하지 않는 게시물입니다.");
-				return "redirect:/bbs";
-			}
-			
-			if(!user_id.equals(boarder.getWriter())) {
-				ra.addFlashAttribute("msg", "권한이 없습니다..");
-				return "redirect:/bbs";
-			}
-			
-			model.addAttribute("map", map);
-			
-			return "bbs/update";
-			
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String update(Integer boarder_id, Model model, HttpSession session, RedirectAttributes ra) throws Exception {
+		
+		String user_id = (String) session.getAttribute("user_id");
+		
+		HashMap<String, Object> map = bbsService.view(boarder_id);
+		Boarder boarder = (Boarder) map.get("boarder");
+		
+		if(user_id == null) {
+			ra.addFlashAttribute("msg", "로그인이 필요합니다.");
+			return "redirect:/login";
 		}
+		
+		if(boarder == null) {
+			ra.addFlashAttribute("msg", "존재하지 않는 게시물입니다.");
+			return "redirect:/bbs";
+		}
+		
+		if(!user_id.equals(boarder.getWriter())) {
+			ra.addFlashAttribute("msg", "권한이 없습니다.");
+			return "redirect:/bbs";
+		}
+		
+		model.addAttribute("map", map);
+		
+		return "bbs/update";
+		
+	}
 	
 	// url 패턴이 'path/bbs/writeAction' 일 경우
 	@RequestMapping(value = "/writeAction", method = RequestMethod.POST)
@@ -117,14 +118,22 @@ public class BbsController {
 		return "redirect:/bbs/view?boarder_id=" + uploadFile.getBoarder_id();
 	}
 	
-	//url 패턴이'path/bbs/updateAction' 일 경우
-	@RequestMapping(value = "/updateAction",method =RequestMethod.POST)
-	public String updateAction(Boarder boarder, MultipartFile file) throws Exception{
+	// url 패턴이 'path/bbs/updateAction' 일 경우
+	@RequestMapping(value = "/updateAction", method = RequestMethod.POST)
+	public String updateAction(Boarder boarder, MultipartFile file) throws Exception {
 		
 		bbsService.updateAction(boarder, file);
-		return "redirect:/bbs/view?boarder_id="+boarder.getBoarder_id();
+		
+		return "redirect:/bbs/view?boarder_id=" + boarder.getBoarder_id();
+		
+	}
+	
+	// url 패턴이 'path/bbs/deleteAction' 일 경우
+	@RequestMapping(value ="deleteAction", method = RequestMethod.GET)
+	public String deleteAction(int boarder_id) throws Exception{
+		bbsService.deleteAction(boarder_id);
+		return "redirect:/bbs";
 	}
 	
 	
 }
-

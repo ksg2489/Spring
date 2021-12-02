@@ -1,6 +1,9 @@
 package com.bbs.dao;
 
+import java.util.List;
+
 import com.bbs.vo.Authmail;
+import com.bbs.vo.Boarder;
 import com.bbs.vo.Users;
 
 public interface UsersDAO {
@@ -12,4 +15,5 @@ public interface UsersDAO {
 	public void deleteAuthmail(String uer_mail) throws Exception;
 	public void join(Users users) throws Exception;
 	public Users login(Users users) throws Exception;
+	
 }
